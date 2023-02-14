@@ -1,0 +1,11 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: lottery
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+  profiles:
+    active: local

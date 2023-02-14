@@ -9,19 +9,33 @@ import java.util.Collections;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.tron.trident.abi.TypeReference;
 import org.tron.trident.abi.datatypes.Address;
 import org.tron.trident.abi.datatypes.Function;
 import org.tron.trident.abi.datatypes.Type;
 import org.tron.trident.abi.datatypes.generated.Uint256;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author iven
  *
  */
+@Slf4j
+@RestController("AppLocationController")
+@RequestMapping("/ticker")
 public class TickerContractAction extends ContractAction {
-	private static final Logger logger = Logger.getLogger(TickerContractAction.class.getName());
-
+	// private static final Logger logger = Logger.getLogger(TickerContractAction.class.getName());
+	@Value("${privateKey}")
+	private String privateKey;
+	@Value("${ownerAddr}")
+	private String ownerAddr;
+	@Value("${contractAddr}")
+	private String contractAddr;
 	/**
 	 * 购买票据接口buyTicker
 	 * 功能：接口收取用户的REA token 手续费后，给用户生成一张购买矿机的票据。
@@ -67,12 +81,14 @@ public class TickerContractAction extends ContractAction {
 		return exeFunction(function);
 	}
 
-	private String exeFunction(Function function) {
-		// 用配置文件取代
-		String privateKey = "d6c12ee57f6a0bbaeb823a4c34e61fe2d2da0557a392392b979ab46c97c2cc5f";
-		String ownerAddr = "TEeeCkMA3gXekaKRPYMhhEwUkve6YBCTVy";
-		String contractAddr = "TVVYiR89Ty7FXWPi7jfjYBMNkmZvVwtse3";
 
+	@GetMapping("/")
+	public String test(){
+		log.info("privateKey is:{}", privateKey);
+		return "abc";
+	}
+
+	private String exeFunction(Function function) {
 		return exeFunction(function, privateKey, ownerAddr, contractAddr);
 	}
 
