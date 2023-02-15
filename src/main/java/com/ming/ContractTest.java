@@ -16,9 +16,12 @@ import java.math.BigInteger;
 
 import org.junit.Test;
 
+import com.ming.controller.MinerContractAction;
+import com.ming.controller.TickerConroller;
+
 public class ContractTest {
 	
-	TickerContractAction ticker = new TickerContractAction();
+	TickerConroller ticker = new TickerConroller();
 	MinerContractAction miner = new MinerContractAction();
 	
 	//@Test

@@ -1,26 +1,38 @@
 /**
  * 
  */
-package com.ming;
+package com.ming.controller;
 
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
 import org.tron.trident.abi.TypeReference;
 import org.tron.trident.abi.datatypes.Address;
 import org.tron.trident.abi.datatypes.Function;
 import org.tron.trident.abi.datatypes.Type;
 import org.tron.trident.abi.datatypes.generated.Uint256;
 
+import com.ming.component.ContractAction;
+
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author iven
  *
  */
+@Controller
+@Slf4j
 public class MinerContractAction extends ContractAction {
-	private static final Logger logger = Logger.getLogger(MinerContractAction.class.getName());
+	@Resource
+	private ContractAction contractAction;
+
+
+	
 
 	/**
 	 * 抵押矿机接口
@@ -44,7 +56,7 @@ public class MinerContractAction extends ContractAction {
 						new Uint256(profitAmount)).stream().collect(Collectors.<Type> toList()),
 				Collections.<TypeReference<?>>emptyList());
 
-		return exeFunction(function);
+		return contractAction.exeFunction(function);
 	}
 
 	/**
@@ -67,16 +79,7 @@ public class MinerContractAction extends ContractAction {
 						new Uint256(claimFeeAmount)).stream().collect(Collectors.<Type>toList()),
 				Collections.<TypeReference<?>>emptyList());
 
-		return exeFunction(function);
-	}
-
-	private String exeFunction(Function function) {
-		// 用配置文件取代
-		String privateKey = "d6c12ee57f6a0bbaeb823a4c34e61fe2d2da0557a392392b979ab46c97c2cc5f";
-		String ownerAddr = "TEeeCkMA3gXekaKRPYMhhEwUkve6YBCTVy";
-		String contractAddr = "TMMBsjSVaWXzzTgBnunkGatoKgi57wevyg";
-
-		return exeFunction(function, privateKey, ownerAddr, contractAddr);
+		return contractAction.exeFunction(function);
 	}
 
 }
