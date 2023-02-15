@@ -90,7 +90,7 @@ public class TickerConroller extends ContractAction {
 	 * @param profitToken     挖矿产出token
 	 * @return
 	 */
-	@PostMapping("/buyTicker")
+	@GetMapping("/buyTicker")
 	public String buyTicker(String buyer, BigInteger tickerIndex, BigInteger minerLevel, BigInteger tickerPayAmount,
 			BigInteger multiple, String profitToken) {
 		Function function = new Function("buyTicker", Arrays.asList(
@@ -114,7 +114,7 @@ public class TickerConroller extends ContractAction {
 	 * @param payAmount 用户支付金额
 	 * @return
 	 */
-	@PostMapping("/rewardTicker")
+	@GetMapping("/rewardTicker")
 	public String rewardTicker(String buyer, BigInteger payAmount) {
 		Function function = new Function("rewardTicker", Arrays.asList(
 				new Address(buyer),
