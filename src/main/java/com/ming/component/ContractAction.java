@@ -11,9 +11,11 @@ import org.tron.trident.abi.FunctionReturnDecoder;
 import org.tron.trident.abi.datatypes.Function;
 import org.tron.trident.abi.datatypes.Type;
 import org.tron.trident.core.ApiWrapper;
+import org.tron.trident.core.exceptions.IllegalException;
 import org.tron.trident.core.transaction.TransactionBuilder;
 import org.tron.trident.proto.Chain.Transaction;
 import org.tron.trident.proto.Response.TransactionExtention;
+import org.tron.trident.proto.Response.TransactionInfo;
 import org.tron.trident.utils.Numeric;
 
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +48,14 @@ public class ContractAction {
 		log.info(signedTxn.toString());
 		String ret = wrapper.broadcastTransaction(signedTxn);
 		log.info("ret is:{}",ret);
+		try {
+			Transaction transactionById = wrapper.getTransactionById(ret);
+			log.info("transactionById is:{}",transactionById);
+			TransactionInfo transactionInfoById = wrapper.getTransactionInfoById("24337b660790301a7c7919f11d910fa67db608ff9399a08e804fe067d9ecc91e");
+			log.info("transactionInfoById is:{}",transactionInfoById);
+		} catch (IllegalException e) {
+			log.error("查询交易失败", e);
+		}
 		return ret;
 	}
 
