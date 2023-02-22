@@ -24,7 +24,7 @@ public class ContractTest {
 	TickerConroller ticker = new TickerConroller();
 	MinerContractAction miner = new MinerContractAction();
 	
-	//@Test
+	@Test
 	public void testBuyTicker() {
 		String ret = ticker.buyTicker("TEeeCkMA3gXekaKRPYMhhEwUkve6YBCTVy", BigInteger.valueOf(1000), BigInteger.valueOf(3),
 				BigInteger.valueOf(100), BigInteger.valueOf(3), "TVhTnr8TqheP2My6UNtuFze1mSw2B9pUW6");
@@ -44,7 +44,7 @@ public class ContractTest {
 		System.out.println(ret);
 	}
 	
-	@Test
+	// @Test
 	public void testClaimProfit() {
 		String ret = miner.claimProfit("TEeeCkMA3gXekaKRPYMhhEwUkve6YBCTVy", BigInteger.valueOf(1000),
 				BigInteger.valueOf(1000), BigInteger.valueOf(300));

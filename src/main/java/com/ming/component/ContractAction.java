@@ -45,7 +45,7 @@ public class ContractAction {
 
 		log.info(signedTxn.toString());
 		String ret = wrapper.broadcastTransaction(signedTxn);
-
+		log.info("ret is:{}",ret);
 		return ret;
 	}
 
