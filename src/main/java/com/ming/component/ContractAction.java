@@ -56,6 +56,7 @@ public class ContractAction {
 		} catch (IllegalException e) {
 			log.error("查询交易失败", e);
 		}
+		wrapper.close();
 		return ret;
 	}
 
@@ -68,6 +69,7 @@ public class ContractAction {
 		TransactionExtention txnExt = wrapper.constantCall(ownerAddr, contractAddr, function);
 		String result = Numeric.toHexString(txnExt.getConstantResult(0).toByteArray());
 		List<Type> functionResult = FunctionReturnDecoder.decode(result, function.getOutputParameters());
+		wrapper.close();
 		return functionResult;
 	}
 
