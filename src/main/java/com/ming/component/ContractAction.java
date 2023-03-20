@@ -45,7 +45,7 @@ public class ContractAction {
 		builder.setMemo("memo test");
 		Transaction signedTxn = wrapper.signTransaction(builder.build());
 
-		log.info(signedTxn.toString());
+		log.info("signedTxn is:{}",signedTxn.toString());
 		String ret = wrapper.broadcastTransaction(signedTxn);
 		log.info("ret is:{}",ret);
 		try {
